@@ -83,11 +83,13 @@ Here we will insert your Start9 server's CA certificate into Linux's trust store
         
         First, ensure mDNS resolution is turned on so you can reach your server:
 
-        Ensure ``MulticastDNS=Yes`` is set in /etc/systemd/resolved.conf and then restart systemd-resolved:
+        Ensure ``MulticastDNS=resolve`` is set in /etc/systemd/resolved.conf and then restart systemd-resolved:
 
         .. code-block:: bash
             
             sudo systemctl restart systemd-resolved
+            sudo nmcli connection modify <connection_name> connection.mdns yes connection.llmnr yes
+            sudo systemctl restart NetworkManager
 
         Trust your server's CA certificate:
 
